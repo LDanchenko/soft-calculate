@@ -13,7 +13,6 @@ echo 'c' . $count;
 for ($i=0; $i<count($result[1]); $i++) {
    $max[$i] = $result[0][$i];
     for ($c=0; $c<$count; $c++ ) {
-        echo 'aaa ' . $i . 'bbb ' . $result[$c][$i] . PHP_EOL;
         if ($max[$i] <= $result[$c][$i]) {
             $max[$i] = $result[$c][$i];
         }
@@ -28,5 +27,22 @@ for ($i=0; $i<=count($max); $i++){
     $sum += $j;
     $sumY += $max[$i];
 }
+$res = $sum/$sumY;
+echo 'RESULT = ' . $res . PHP_EOL;
 
-echo 'RESULT = ' . ($sum/$sumY);
+$nokomf = Rules::trapec($res, 0,0,0.4,0.5);
+echo 'NEKOMFORT  = ' . $nokomf.PHP_EOL;
+$komf = Rules::trapec($res, 0.4, 0.5, 1, 1);
+//$komf = 0;
+echo 'KOMFORT  = ' . $komf.PHP_EOL;
+if($komf > $nokomf){
+    echo  "Маршрут комфортный";
+}
+if ($nokomf > $komf) {
+    echo "Маршрут некомфортный";
+}
+if ($nokomf == $komf){
+    $rand = ["Маршрут комфортный", "Маршрут некомфортный"];
+    $rand_keys = array_rand($rand, 2);
+    print_r($rand[$rand_keys[0]]);
+}
